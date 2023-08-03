@@ -1,0 +1,15 @@
+---
+import ItemCard from "@components/itemcard.astro";
+import CardGrid from "@components/cardgrid.astro";
+
+let { items } = Astro.props;
+
+---
+<CardGrid>
+  {
+    items.map((item) => (
+    <ItemCard 
+      item={item}/>
+    ))
+  }
+</CardGrid>

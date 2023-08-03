@@ -1,0 +1,24 @@
+---
+import Card from "@components/card.astro"
+import { getEntries } from "astro:content";
+import ItemThumbnail from "@components/itemthumbnail.astro"
+const { item } = Astro.props;
+
+
+// const collectionItems = await getEntries(item.data.items);
+
+// let featuredItem = collectionItems.filter(function(i) {
+//   return i.id === item.data.featured.id
+// })[0];
+
+---
+<Card>
+    <ItemThumbnail id={item.id} />
+    <!-- {item.id && 
+    <div class="p-4">
+        <div class="text-gray-900 font-bold text-xl mb-2">
+          
+        </div>
+    </div>
+    } -->
+</Card>
