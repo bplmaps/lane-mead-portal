@@ -1,0 +1,23 @@
+---
+import { getEntries } from "astro:content";
+
+import Card from "@components/card.astro"
+import ClientLoadingItemCard from "./clientLoadingItemCard.svelte"
+
+
+const { collectionGroup } = Astro.props;
+const collectionItems = await getEntries(collectionGroup.data.items);
+
+let featuredItem = collectionItems.filter(function(i) {
+  return i.id === collectionGroup.data.featured.id
+})[0];
+
+const link = `/collection-group/${collectionGroup.id}`
+
+---
+<a href={link}>
+<Card>
+    <ClientLoadingItemCard title={collectionGroup.data.title} record={featuredItem} client:only="svelte" />
+</Card>
+</a>
+
