@@ -8,7 +8,7 @@ import ItemCard from "@components/itemCard/itemCard.astro"
 import SingleItemCard from "@components/singleitemcard.astro";
 import CardGrid from "@components/cardgrid.astro";
 
-// Generate a new path for every  entry
+// Generate a new path for every entry
 export async function getStaticPaths() {
   const itemEntries = await getCollection("collection-group");
   return itemEntries.map((entry) => ({

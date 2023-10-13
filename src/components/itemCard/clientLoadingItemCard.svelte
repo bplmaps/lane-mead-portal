@@ -1,5 +1,4 @@
 <script lang="ts">
-	import viewport from './viewportAction.js';
   import { inview } from 'svelte-inview';
   import type { ObserverEventDetails, Options } from 'svelte-inview';
   
@@ -13,6 +12,7 @@
     (isInView = detail.inView);
 
   export let record;
+  export let title;
 
   async function getImageURL(id) {
     const meta_endpoint = new URL(
@@ -26,7 +26,6 @@
     const url = `https://bpldcassets.blob.core.windows.net/derivatives/images/${exemplaryImage}/image_thumbnail_300.jpg`;
     return {"title": data.response.document.title_info_primary_tsi, "date": data.response.document.date_tsim, "imgURL": url}
   }
-  let test;
   let data = getImageURL(record.id);
 </script>
 
@@ -38,12 +37,18 @@
     <div>
       <img src={d.imgURL} alt="" class="w-full h-48 object-cover">
     </div>
+    {#if title}
+    <div class="font-serif p-2 text-lg">
+      {title}
+    </div>
+    {:else}
     <div class="font-serif p-2 text-lg">
       {d.title}
     </div>
     <div class="p-2 text-sm">
       {d.date}
     </div>
+    {/if}
     {/if}
     {:catch error}
 	  <p style="color: red">Error loading this item</p>
