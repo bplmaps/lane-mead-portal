@@ -21,6 +21,7 @@ const commId = entry.id.replace("--",":")
 const digitalCommonwealthResponse = await fetch(`https://www.digitalcommonwealth.org/search/${commId}.json`);
 const digitalCommonwealthData = await digitalCommonwealthResponse.json();
 
+const collectionsUrl = `https://www.digitalcommonwealth.org/search/${commId}/`
 const manifestUrl = `https://www.digitalcommonwealth.org/search/${commId}/manifest.json`
 
 ---
@@ -35,8 +36,9 @@ const manifestUrl = `https://www.digitalcommonwealth.org/search/${commId}/manife
 
     </div>
     <IiifViewer iiifType="manifest" endpointUrl={manifestUrl} />
-
-    <h1>Metadata</h1>
-    {JSON.stringify(digitalCommonwealthData)}
+    
+    <div>
+    <a href={collectionsUrl} target="_blank" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Visit this object's record on Digital Commonwealth</a>
+  </div>
   </Container>
 </Layout>

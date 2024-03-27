@@ -1,12 +1,42 @@
-<footer class="my-20">
-  <p class="text-center text-sm text-slate-500">
-    Leventhal Map & Education Center at the Boston Public Library
-  </p>
-  <!--
-    Can we ask you a favor 🙏
-    Please keep this backlink on your website if possible.
-    or Purchase a commercial license from https://web3templates.com
-  -->
+---
+import LMECLogo from "@assets/LMEC-logo.webp";
+import BPLLogo from "@assets/BostonPublicLibrary_book_horiz_BLK.jpg"
+import  { Image }  from "@astrojs/image/components";
+
+---
+
+<footer class="my-16 border-t-2">
+
+  <div class="bg-white py-24 sm:py-32">
+
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <p class="mb-6">The Lane/Mead Boston Industrial Waterfront Portal, version 0.1</p>
+      <dl class="grid grid-cols-1 gap-x-8 gap-y-16 text-center md:grid-cols-4">
+        <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+          <dt class="text-base leading-7 text-gray-600">
+            <a href="https://leventhalmap.org">
+              <Image
+                src={LMECLogo}
+                alt="Leventhal Map and Education Center logo"
+              />
+            </a>
+          </dt>
+        </div>
+
+        <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+          <dt class="text-base leading-7 text-gray-600">
+            <a href="https://bpl.org">
+              <Image
+                src={BPLLogo}
+                alt="Boston Public Library logo"
+              />
+            </a>
+          </dt>
+        </div>
+        
+      </dl>
+    </div>
+  </div>
   <p class="text-center text-xs text-slate-500 mt-1">
     Built from a template by <a
       href="https://web3templates.com"

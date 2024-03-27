@@ -29,9 +29,15 @@ const { entry } = Astro.props;
       </div>
 
       <h1
-        class="text-4xl lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight">
+        class="text-4xl lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight mb-2">
         {entry.data.title}
       </h1>
+
+      <p set:html={entry.data.description}>
+
+      </p>
+
+
       
     </div>
 

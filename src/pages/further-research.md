@@ -3,23 +3,12 @@ title: Further Research
 layout: "../layouts/SingletonLayout.astro"
 ---
 
-# Silvas inque
+### About the Lane/Mead Collection
 
-## Silvis pendentem atris semper
+[Read the LibGuide](https://guides.bpl.org/maritimeindustry/intro)
 
-Lorem markdownum Pentheus; hic illa Hesperus vobis barbae terrent. Aesonius et
-dumque *forma hiemes* ubi dignum [superest natas](http://in.org/fallacia-illis)
-contrarius absit facta domino, recuso!
+The [Lane/Mead Boston Maritime Collection](https://archives.bpl.org/repositories/2/resources/130) at the Boston Public Library documents aspects of Boston’s maritime industrial history primarily from the mid-19th century to the end of the 20th century.
 
-## Iam fera fulmina longaque
+As a steamship agent, Mr. Lane’s job was to bring cargos into port, requiring an interest in port facilities, harbor maintenance, labor relations, marine safety, regulations, and other less romantic aspects of port operations. Searches were conducted for documentation of these operational aspects of the port and for historical maritime businesses on the Boston waterfront.
 
-Cum **da finiat** mulcet; pater labra vertit senis! Volvitur *conscia meritorum*
-adhuc. Mihi vidit parabat spectat, ore non o orbataque Huic pectora videre,
-Cymeli occupat. Fugiant revolat occupat versa, est matris rate promissa Oenidae,
-venientem dominis, est est caecisque pars nefas.
-
-- Signaverat dixit
-- Erat dum tergo praeceps est catenas
-- Inarimen clarum
-- Et herba cum
-- Hoc petere optasse ut ossibus parem
+More information on the contents of this collection can be found at archives.bpl.org, and the collection itself can be requested to use in the Special Collections Reading Room.

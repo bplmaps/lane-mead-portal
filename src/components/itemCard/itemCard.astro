@@ -17,7 +17,7 @@ const tags = record.data.tags.map((t)=>{
 })
 
 ---
-<a href={link}>
+<a href={link} class="no-underline">
 <Card>
     <ClientLoadingItemCard record={record} client:only="svelte" />
     <div class="p-2" set:html={tags}>

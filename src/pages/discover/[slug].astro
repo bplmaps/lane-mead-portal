@@ -19,34 +19,26 @@ const { Content } = await entry.render();
 
 <Layout title={entry.data.title}>
   <Container>
-    <div class="mx-auto max-w-3xl mt-14">
-
+    <div class="mx-auto prose-lg mt-6 max-w-3xl">
       <h1
-        class="text-4xl lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight">
+        class="text-4xl font-serif lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight my-0">
         {entry.data.title}
       </h1>
-      <div class="flex gap-2 mt-3 items-center flex-wrap md:flex-nowrap">
+      <div class="flex gap-2 mt-2 items-center flex-wrap md:flex-nowrap">
         <span class="text-gray-400">
           {entry.data.author}
         </span>
-        <span class="text-gray-400">•</span>
-        <time
-          class="text-gray-400"
-          datetime={entry.data.publishDate.toISOString()}>
-          {entry.data.publishDate.toDateString()}
-        </time>
-        
       </div>
-    </div>
-
-    <div class="mx-auto prose prose-lg mt-6 max-w-3xl">
-      <Content />
+      <hr>
+      <div class="prose">
+        <Content />
+      </div>
     </div>
     <div class="text-center mt-8">
       <a
-        href="/blog"
+        href="/discover"
         class="bg-gray-100 px-5 py-3 rounded-md hover:bg-gray-200 transition"
-        >← Back to Discover</a
+        >← Back to all Stories</a
       >
     </div>
   </Container>
