@@ -1,0 +1,36 @@
+---
+import IiifViewer from "@components/iiifViewer/iiifViewer.astro";
+
+const { identifier } = Astro.props;
+
+const commId = identifier.replace("--", ":");
+  const digitalCommonwealthResponse = await fetch(
+    `https://www.digitalcommonwealth.org/search/${commId}.json`
+  );
+  const digitalCommonwealthData = await digitalCommonwealthResponse.json();
+
+  const collectionsUrl = `https://www.digitalcommonwealth.org/search/${commId}/`;
+  const manifestUrl = `https://www.digitalcommonwealth.org/search/${commId}/manifest.json`;
+---
+
+<div class="py-4">
+    <div class="mb-3">
+      <span
+        class="inline-flex items-center rounded-md bg-purple-100 px-2 py-1 text-sm font-medium text-purple-700"
+        >Collection Item</span
+      >
+    </div>
+    <h1 class="text-4xl mb-6 font-bold font-serif">
+      {digitalCommonwealthData.data.attributes.title_info_primary_tsi}
+    </h1>
+  </div>
+  <IiifViewer iiifType="manifest" endpointUrl={manifestUrl} />
+
+  <div>
+    <a
+      href={collectionsUrl}
+      target="_blank"
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      >Visit this object's record on Digital Commonwealth</a
+    >
+  </div>
