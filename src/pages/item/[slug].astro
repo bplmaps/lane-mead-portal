@@ -5,8 +5,6 @@ import Container from "@components/container.astro";
 
 import IiifViewer from "@components/iiifViewer/iiifViewer.astro";
 
-
-
 // Generate a new path for every collection entry
 export async function getStaticPaths() {
   const itemEntries = await getCollection("item");
@@ -16,29 +14,53 @@ export async function getStaticPaths() {
   }));
 }
 
+let ia = false;
 const { entry } = Astro.props;
-const commId = entry.id.replace("--",":")
-const digitalCommonwealthResponse = await fetch(`https://www.digitalcommonwealth.org/search/${commId}.json`);
-const digitalCommonwealthData = await digitalCommonwealthResponse.json();
+if (entry.id.includes("ia--")) {
+  ia = true;
+} else {
+  const commId = entry.id.replace("--", ":");
+  const digitalCommonwealthResponse = await fetch(
+    `https://www.digitalcommonwealth.org/search/${commId}.json`
+  );
+  const digitalCommonwealthData = await digitalCommonwealthResponse.json();
 
-const collectionsUrl = `https://www.digitalcommonwealth.org/search/${commId}/`
-const manifestUrl = `https://www.digitalcommonwealth.org/search/${commId}/manifest.json`
-
+  const collectionsUrl = `https://www.digitalcommonwealth.org/search/${commId}/`;
+  const manifestUrl = `https://www.digitalcommonwealth.org/search/${commId}/manifest.json`;
+}
 ---
 
 <Layout title="Collection Record">
   <Container>
+    { !ia && 
     <div class="py-4">
       <div class="mb-3">
-        <span class="inline-flex items-center rounded-md bg-purple-100 px-2 py-1 text-sm font-medium text-purple-700">Collection Item</span>
+        <span
+          class="inline-flex items-center rounded-md bg-purple-100 px-2 py-1 text-sm font-medium text-purple-700"
+          >Collection Item</span
+        >
       </div>
-      <h1 class="text-4xl mb-6 font-bold font-serif">{digitalCommonwealthData.data.attributes.title_info_primary_tsi}</h1>
-
+      <h1 class="text-4xl mb-6 font-bold font-serif">
+        {digitalCommonwealthData.data.attributes.title_info_primary_tsi}
+      </h1>
     </div>
     <IiifViewer iiifType="manifest" endpointUrl={manifestUrl} />
-    
+
     <div>
-    <a href={collectionsUrl} target="_blank" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Visit this object's record on Digital Commonwealth</a>
-  </div>
+      <a
+        href={collectionsUrl}
+        target="_blank"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >Visit this object's record on Digital Commonwealth</a
+      >
+    </div>
+    }
+
+    { ia && 
+    
+    <h1 class="text-4xl font-bold text-red-800">Internet Archive Record</h1>
+    <p>Internet Archive collection records are not yet fully supported. <a class="text-blue-500" href={`https://archive.org/details/${entry.id.split("ia--")[1]}`}>Click here to visit the record on Internet Archive.</a></p>
+    
+    }
   </Container>
 </Layout>

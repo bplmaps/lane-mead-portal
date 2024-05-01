@@ -14,7 +14,7 @@
   export let record;
   export let title;
 
-  async function getImageURL(id) {
+  async function fetchFromDC(id) {
     const meta_endpoint = new URL(
       `https://collections.leventhalmap.org/search/${id.replace(
         "--",
@@ -26,7 +26,15 @@
     const url = `https://bpldcassets.blob.core.windows.net/derivatives/images/${exemplaryImage}/image_thumbnail_300.jpg`;
     return {"title": data.response.document.title_info_primary_tsi, "date": data.response.document.date_tsim, "imgURL": url}
   }
-  let data = getImageURL(record.id);
+
+  async function fetchFromAI(id) {
+    const identifier = id.split("ia--")[1];
+    const meta_endpoint = new URL(`https://archive.org/metadata/${identifier}`)
+    console.log(meta_endpoint);
+    const data = await fetch(meta_endpoint).then((response) => response.json());
+    return {"title": data.metadata.title, "date": data.metadata.date, "imgURL": `https://archive.org/services/img/${identifier}`}
+  }
+  let data = record.id.includes("commonwealth--") ? fetchFromDC(record.id) : fetchFromAI(record.id);
 </script>
 
 <div use:inview="{options}" on:inview_change="{handleChange}" class="min-h-[15vh]">
