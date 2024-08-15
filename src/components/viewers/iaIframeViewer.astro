@@ -1,0 +1,26 @@
+---
+interface Props {
+    id: string;
+}
+
+const { id } = Astro.props;
+---
+
+
+<div id="outer">
+    <iframe id="iaframe" src=`https://archive.org/embed/${id}` allowfullscreen></iframe>
+</div>
+
+<style>
+    #outer {
+        width: 100%;
+        height: 800px;
+        margin: 0;
+        padding: 0;
+        background-color: #333;
+    }
+    #iaframe {
+        width: 100%;
+        height: 100%;
+    }
+</style>

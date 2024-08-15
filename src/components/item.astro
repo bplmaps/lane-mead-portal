@@ -1,0 +1,98 @@
+---
+import IaIframeViewer from "@components/viewers/iaIframeViewer.astro";
+import IiifViewer from "@components/viewers/iiifViewer.astro";
+
+let { id } = Astro.props;
+
+const repo = id.includes("ia--") ? "ia" : "dc";
+id = (repo === "ia") ? id.split("ia--")[1] : id.replace("--", ":");
+
+const metaUrl = (repo === "ia") ? 
+    `https://archive.org/metadata/${id}&output=json` : `https://www.digitalcommonwealth.org/search/${id}.json`;
+
+const collectionUrl = (repo === "ia") ? 
+    `https://archive.org/details/${id}` : `https://www.digitalcommonwealth.org/search/${id}/`;
+
+const response = await fetch(metaUrl);
+let meta = await response.json()
+
+const data = {
+  "title": null,
+  "description": null,
+  "date": null,
+  "creator": null,
+  "manifest": ""
+}
+
+if (repo === "ia") {
+  meta = meta.metadata
+  data.title = meta.title
+  data.description = meta.description
+  data.date = meta.date
+  data.creator = meta.creator
+} else {
+  meta = meta.data.attributes
+  data.title = meta.title_info_primary_tsi
+  // data.description = meta.metadata.description
+  data.date = meta.date_tsim
+  data.creator = meta.name_tsim
+  data.manifest = `https://www.digitalcommonwealth.org/search/${id}/manifest.json`
+}
+---
+
+<div class="py-4">
+    <div class="mb-3">
+      <span
+        class="inline-flex items-center rounded-md bg-purple-100 px-2 py-1 text-sm font-medium text-purple-700"
+        >Collection Item</span
+      >
+    </div>
+    <h1 class="text-4xl mb-6 font-bold font-serif">
+      {data.title}
+    </h1>
+</div>
+
+{repo === "ia" ?  <IaIframeViewer {id}/> : <IiifViewer iiifType="manifest" endpointUrl={data.manifest}/>}
+
+<div class="overflow-hidden bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-6 sm:px-6">
+        <h3 class="text-base font-semibold leading-7 text-gray-900">About this object</h3>
+    </div>
+    <div class="border-t border-gray-100">
+        <div class="p-6">
+            <p>{data.description}</p>
+        </div>
+    </div>
+</div>
+
+<div class="overflow-hidden bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-6 sm:px-6">
+      <h3 class="text-base font-semibold leading-7 text-gray-900">Metadata</h3>
+    </div>
+    <div class="border-t border-gray-100">
+      <dl class="divide-y divide-gray-100">
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-900">Title</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{data.title}</dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-900">Date</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{data.date}</dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-900">Creators</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{data.creator}</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>
+
+<div>
+<a
+    href={collectionUrl}
+    target="_blank"
+    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+    >Visit this object's record on the Internet Archive</a
+>
+</div>

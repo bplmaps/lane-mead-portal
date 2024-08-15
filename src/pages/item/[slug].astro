@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import ItemIA from "@components/item/item-ia.astro";
-import ItemDC from "@components/item/item-dc.astro";
+import Item from "@components/item.astro";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 
@@ -17,12 +16,10 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 
-const GutComponent = entry.id.includes("ia--") ? ItemIA : ItemDC;
-
 ---
 
 <Layout title="Collection Record">
   <Container>
-    <GutComponent identifier={entry.id} />
+    <Item id={entry.id} />
   </Container>
 </Layout>
