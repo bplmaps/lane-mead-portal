@@ -9,11 +9,11 @@ import Layout from "@layouts/Layout.astro";
 import data from "instance.json";
 ---
 
-<Layout title={data.projectTitle}>
+<Layout title={data.title}>
   <Hero 
-      title={data.projectTitle}
+      title={data.title}
       splashText={data.splashText}
-      heroText={data.projectDescription}
+      heroText={data.description}
       headerImage={data.headerImage}
       />
   <Container>

@@ -1,0 +1,105 @@
+---
+import LMECLogo from "@assets/LMEC-logo.webp";
+import BPLLogo from "@assets/BostonPublicLibrary_book_horiz_BLK.jpg"
+import OGLogo from "@assets/ographies.png"
+import { Image } from 'astro:assets';
+
+import instanceVariables from "instance.json";
+
+const navLinks = [
+    {
+      title: "Home",
+      path: "/"
+    },
+    {
+      title: "Collection Groups",
+      path: "/collection-groups"
+    },
+    {
+      title: "Discover Stories",
+      path: "/discover",
+    },
+    {
+      title: "Further Research",
+      path: "/further-research",
+    }
+  ]
+
+const infoLinks = [
+    {
+      title: "Leventhal Map & Education Center",
+      path: "https://www.leventhalmap.org/"
+    },
+    {
+      title: "Boston Public Library",
+      path: "https://www.bpl.org/",
+    },
+    {
+      title: "Github",
+      path: "https://github.com/bplmaps/lane-mead-portal",
+    }
+  ]
+
+---
+
+  <footer class="bg-white dark:bg-gray-900 mt-24">
+    <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+      <div class="md:flex md:justify-between mb-12">
+        <div class="grid grid-cols-1 gap-4 md:gap-8 md:grid-cols-3">
+          <div>
+            {instanceVariables.description}
+          </div>
+          <div class="text-gray-500 dark:text-gray-400">
+            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Navigation</h2>
+              <ul class="font-medium">
+                {
+                  navLinks.map((item) => (
+                      <li class="mb-4">
+                        <a href=`${item.path}` class="hover:underline ">{item.title}</a>
+                    </li>
+                  ))
+                }
+              </ul>
+          </div>
+          <div class="text-gray-500 dark:text-gray-400">
+            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">More Information</h2>
+              <ul class="font-medium">
+                {
+                  infoLinks.map((item) => (
+                      <li class="mb-4">
+                        <a href=`${item.path}` class="hover:underline ">{item.title}</a>
+                    </li>
+                  ))
+                }
+              </ul>
+          </div>
+      </div>
+    </div>
+    <hr>
+    <div class="flex justify-center">
+      <div class="grid grid-cols-1 gap-0 md:gap-20 md:grid-cols-3">
+        <a href="https://leventhalmap.org">
+          <Image
+          class="my-6 w-40"
+            src={LMECLogo}
+            alt="Leventhal Map and Education Center logo"
+          />
+        </a>
+        <a href="https://www.bpl.org/">
+          <Image
+            class="my-6 w-40"
+            src={BPLLogo}
+            alt="Boston Public Library logo"
+          />
+        </a>
+
+        <a href="https://bpl.org">
+          <Image
+            class="my-6 w-40"
+            src={OGLogo}
+            alt="OGRAPHIES Research & Design Logo"
+          />
+        </a>
+    </div>
+  </div>
+</footer>
