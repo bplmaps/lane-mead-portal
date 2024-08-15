@@ -1,2 +1,2 @@
-/// <reference path="../.astro/types.d.ts" />
-/// <reference types="@astrojs/image/client" />
+/// <reference types="astro/types" />
+/// <reference types="astro/client" />
