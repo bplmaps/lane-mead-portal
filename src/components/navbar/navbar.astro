@@ -4,21 +4,21 @@ import Dropdown from "./dropdown.astro";
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
 
 import { getCollection } from "astro:content";
-const collectionGroupRecords = await getCollection("collection-group");
+const collectionGroupRecords = await getCollection("item-collections");
 
 import instanceVariables from "instance.json";
 
 const menuitems = [
   {
     title: "Collection Groups",
-    path: "/collection-group",
+    path: "/item-collections",
     children: collectionGroupRecords.map((r) => {
       return { title: r.data.title, slug: r.id };
     }),
   },
   {
-    title: "Discover Stories",
-    path: "/discover",
+    title: "Stories",
+    path: "/stories",
   },
   {
     title: "Further Research",

@@ -12,10 +12,10 @@ reader = csv.DictReader(input)
 
 
 if not os.path.exists("../src/content/item"):
-    os.mkdir("../src/content/item")
+    os.mkdir("../src/content/items")
 
-if not os.path.exists("../src/content/collection-group"):
-    os.mkdir("../src/content/collection-group")
+if not os.path.exists("../src/content/item-collections"):
+    os.mkdir("../src/content/item-collections")
 
 for row in reader:
     if("archive.org" in row["Permalink"]):
@@ -36,7 +36,7 @@ for row in reader:
         "tags": row["Tags/Subjects"].split(", ")
     }
     
-    with open("../src/content/item/" + identifier + ".json", "w+") as outfile:
+    with open("../src/content/items/" + identifier + ".json", "w+") as outfile:
         json.dump(recordEntry, outfile)
 
     for group in row["Website Collection Groups"].split(", "):
@@ -52,7 +52,7 @@ for row in reader:
             "items": v,
             "featured": v[0]
         }
-        with open("../src/content/collection-group/" + k.lower().replace(" ","-").replace("/","-") + ".json", "w+" ) as outfile:
+        with open("../src/content/item-collections/" + k.lower().replace(" ","-").replace("/","-") + ".json", "w+" ) as outfile:
             json.dump(record, outfile)
 
         

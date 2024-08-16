@@ -1,19 +1,18 @@
 ---
-import { Picture } from "@astrojs/image/components";
-import { arrayOutputType } from "astro/zod";
-
 export interface Props {
-  title: string;
   heroText: string;
   splashText: string;
-  headerImage: Object;
+  headerImage: {
+    src: string;
+    altText: string;
+  };
 }
 
-const { title, heroText, splashText, headerImage } = Astro.props;
+const { heroText, splashText, headerImage } = Astro.props;
 ---
 
 <div class="relative isolate overflow-hidden bg-gray-900 px-6 py-24 sm:py-32 lg:px-8 mb-8">
-  <img src={headerImage.src} alt={headerImage.altText} class="absolute inset-0 -z-10 h-full w-full object-cover brightness-50">
+  <img src={headerImage.src} alt={headerImage.altText} class="absolute inset-0 -z-10 w-full object-cover brightness-50">
 
   <div class="mx-24 max-w-2xl text-left">
     <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl font-serif">{splashText}</h2>

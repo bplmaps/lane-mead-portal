@@ -1,11 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
+import Hero from "@components/hero.astro";
 import Container from "@components/container.astro";
+import { fetchImage } from 'utils/all.js';
 
 // Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("discover");
+  const blogEntries = await getCollection("stories");
   return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -15,28 +17,29 @@ export async function getStaticPaths() {
 // Get the entry directly from the prop on render
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+const bannerImage = await fetchImage(entry.data.banner)
+const banner = {
+  "src": bannerImage.imgURL,
+  "altText": bannerImage.title
+}
 ---
 
 <Layout title={entry.data.title}>
   <Container>
+    <Hero 
+    splashText={entry.data.title}
+    heroText={entry.data.author}
+    headerImage={banner}
+    />
     <div class="mx-auto prose-lg mt-6 max-w-3xl">
-      <h1
-        class="text-4xl font-serif lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight my-0">
-        {entry.data.title}
-      </h1>
-      <div class="flex gap-2 mt-2 items-center flex-wrap md:flex-nowrap">
-        <span class="text-gray-400">
-          {entry.data.author}
-        </span>
-      </div>
-      <hr>
       <div class="prose">
         <Content />
       </div>
     </div>
     <div class="text-center mt-8">
       <a
-        href="/discover"
+        href="/stories"
         class="bg-gray-100 px-5 py-3 rounded-md hover:bg-gray-200 transition"
         >← Back to all Stories</a
       >

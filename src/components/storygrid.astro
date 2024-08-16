@@ -1,0 +1,25 @@
+---
+import StoryCard from "@components/storycard.astro";
+import CardGrid from "@components/cardgrid.astro";
+
+import { getCollection } from "astro:content";
+
+// Filter blog entries with 'draft: false' & date before current date
+let publishedStories = await getCollection("stories", ({ data }) => {
+  return !data.draft && data.publishDate < new Date();
+});
+
+// Sort content entries by publication date
+publishedStories.sort(function (a, b) {
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+
+---
+<CardGrid>
+  {
+    publishedStories.map((story) => (
+    <StoryCard 
+      story={story}/>
+    ))
+  }
+</CardGrid>

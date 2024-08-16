@@ -2,15 +2,16 @@
 import { getEntry } from "astro:content";
 
 import Card from "@components/card.astro"
-import ClientLoadingItemCard from "./clientLoadingItemCard.svelte"
+import ClientLoadingItemCard from "@components/itemCard/clientLoadingItemCard.svelte"
 
 export interface Props {
     "identifier": string;
+    "fullHeight": boolean;
 }
 
-const { identifier } = Astro.props;
-const record = await getEntry('item', identifier);
-const link = `/item/${identifier}`
+const { identifier, fullHeight } = Astro.props;
+const record = await getEntry('items', identifier);
+const link = `/items/${identifier}`
 
 const tags = record.data.tags.map((t)=>{
   return `<span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 mr-2">${t}</span>`;
@@ -19,7 +20,7 @@ const tags = record.data.tags.map((t)=>{
 ---
 <a href={link} class="no-underline">
 <Card>
-    <ClientLoadingItemCard record={record} client:only="svelte" />
+    <ClientLoadingItemCard record={record} fullHeight={fullHeight} client:only="svelte" />
     <div class="p-2" set:html={tags}>
 </Card>
 </a>

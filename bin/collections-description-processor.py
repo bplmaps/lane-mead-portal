@@ -14,14 +14,14 @@ for row in reader:
     description = row["Description"]
 
     try:
-        with open("../src/content/collection-group/" + identifier + ".json", 'r') as inFile:
+        with open("../src/content/item-collections/" + identifier + ".json", 'r') as inFile:
             j = json.load(inFile)
         
         j["description"] = description
 
         print(j)
 
-        with open("../src/content/collection-group/" + identifier + ".json", 'w') as outFile:
+        with open("../src/content/item-collections/" + identifier + ".json", 'w') as outFile:
             json.dump(j, outFile)
         
     except:

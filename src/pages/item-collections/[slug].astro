@@ -5,12 +5,11 @@ import Container from "@components/container.astro";
 
 import ItemCard from "@components/itemCard/itemCard.astro"
 
-import SingleItemCard from "@components/singleitemcard.astro";
 import CardGrid from "@components/cardgrid.astro";
 
 // Generate a new path for every entry
 export async function getStaticPaths() {
-  const itemEntries = await getCollection("collection-group");
+  const itemEntries = await getCollection("item-collections");
   return itemEntries.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },
@@ -33,8 +32,8 @@ const { entry } = Astro.props;
         {entry.data.title}
       </h1>
 
-      <p set:html={entry.data.description}>
-
+      <p>
+        {entry.data.description}
       </p>
 
 
@@ -43,7 +42,7 @@ const { entry } = Astro.props;
 
       <CardGrid>
       { entry.data.items.map((collectionGroupItem) => (
-          <ItemCard identifier={collectionGroupItem.id} />
+          <ItemCard fullHeight={false} identifier={collectionGroupItem.id} />
       )
 
       ) }

@@ -2,16 +2,15 @@
 import CollectionCard from "@components/itemCard/collectionCard.astro";
 import CardGrid from "@components/cardgrid.astro";
 
-import ItemCard from "@components/itemCard/itemCard.astro"
-
 import { getCollection } from "astro:content";
-const collection = await getCollection("collection-group");
+const collections = await getCollection("item-collections");
 ---
 <CardGrid>
   {
-    collection.map((collectionGroup) => (
+    collections.map((collection) => (
     <CollectionCard
-      collectionGroup={collectionGroup}/>
+      collection={collection}
+      fullHeight={false}/>
     ))
   }
 </CardGrid>

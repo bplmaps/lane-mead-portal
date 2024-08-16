@@ -1,6 +1,6 @@
 ---
 import Container from "@components/container.astro";
-import DiscoverGrid from "@components/discovergrid.astro";
+import StoryGrid from "@components/storygrid.astro";
 import CollectionGrid from "@components/collectiongrid.astro";
 import Hero from "@components/hero.astro";
 import SectionHead from "@components/sectionhead.astro";
@@ -17,8 +17,8 @@ import data from "instance.json";
       headerImage={data.headerImage}
       />
   <Container>
-    <SectionHead text="Discover Stories"/>
-    <DiscoverGrid />
+    <SectionHead text="Stories"/>
+    <StoryGrid />
     <SectionHead text="Explore Collection Groups"/>
     <CollectionGrid />
   </Container>
