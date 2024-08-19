@@ -17,15 +17,16 @@ export const fetchFromDC = async (id) => {
   );
   const data = await fetch(meta_endpoint).then((response) => response.json());
   const exemplaryImage = data.response.document.exemplary_image_ssi;
-  const url = `https://bpldcassets.blob.core.windows.net/derivatives/images/${exemplaryImage}/image_access_800.jpg`;
-  return {"title": data.response.document.title_info_primary_tsi, "date": data.response.document.date_tsim, "imgURL": url}
+  const url = new URL(`https://bpldcassets.blob.core.windows.net/derivatives/images/${exemplaryImage}/image_access_800.jpg`);
+  return {"title": data.response.document.title_info_primary_tsi, "date": data.response.document.date_tsim, "imgURL": url.toString()}
 }
 
 export const fetchFromAI = async (id) => {
   const identifier = id.split("ia--")[1];
   const meta_endpoint = new URL(`https://archive.org/metadata/${identifier}`)
   const data = await fetch(meta_endpoint).then((response) => response.json());
-  return {"title": data.metadata.title, "date": data.metadata.date, "imgURL": `https://archive.org/services/img/${identifier}`}
+  const url = new URL(`https://archive.org/services/img/${identifier}`);
+  return {"title": data.metadata.title, "date": data.metadata.date, "imgURL": url.toString()}
 }
 
 export const fetchImage = (id) => {
@@ -36,7 +37,7 @@ export const fetchBanner = async (id) => {
   const bannerImage = await fetchImage(id)
   return({
     "src": bannerImage.imgURL,
-    "altText": bannerImage.title
+    "alt": (bannerImage.title !== null) ? bannerImage.title : ""
   })
 }
 

@@ -1,7 +1,7 @@
 ---
 import Card from "@components/card.astro"
+import { Image } from 'astro:assets';
 import { fetchBanner } from "utils/all.js";
-
 const { story } = Astro.props;
 const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 const date_fmt = (story.data.publishDate) ? story.data.publishDate.toLocaleDateString('en-us', options) : undefined;
@@ -13,7 +13,7 @@ let banner = await fetchBanner(story.data.banner)
 <Card>
 
 <div>
-  <img src={banner.src} alt="" class="w-full object-cover h-64">
+  <Image src={banner.src} alt={banner.alt} inferSize={true} class="w-full object-cover h-64"/>
 </div>
 <div class="p-4">
   <div class="mb-8">

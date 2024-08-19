@@ -1,20 +1,14 @@
 ---
 import Container from "@components/container.astro";
-import Dropdown from "./dropdown.astro";
+import DropdownComponent from "@components/navbar/dropdown.astro";
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
-
-import { getCollection } from "astro:content";
-const collectionGroupRecords = await getCollection("item-collections");
 
 import instanceVariables from "instance.json";
 
 const menuitems = [
   {
-    title: "Collection Groups",
-    path: "/item-collections",
-    children: collectionGroupRecords.map((r) => {
-      return { title: r.data.title, slug: r.id };
-    }),
+    title: "Collections",
+    path: "/item-collections"
   },
   {
     title: "Stories",
@@ -41,26 +35,13 @@ const menuitems = [
         <ul class="flex flex-col lg:flex-row lg:gap-3">
           {
             menuitems.map((item, index) => (
-              <>
-                {item.children && (
-                  <Dropdown
-                    path={item.path}
-                    title={item.title}
-                    children={item.children}
-                    lastItem={index === menuitems.length - 1}
-                  />
-                )}
-
-                {!item.children && (
-                  <li>
-                    <a
-                      href={item.path}
-                      class="flex lg:px-3 py-2 text-gray-600 hover:text-gray-900">
-                      {item.title}
-                    </a>
-                  </li>
-                )}
-              </>
+              <li>
+                <a
+                  href={item.path}
+                  class="flex lg:px-3 py-2 text-gray-600 hover:text-gray-900">
+                  {item.title}
+                </a>
+              </li>
             ))
           }
         </ul>

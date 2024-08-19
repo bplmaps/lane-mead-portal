@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Hero from "@components/hero.astro";
 import { fetchBanner } from "utils/all.js";
+import SectionHead from "@components/sectionhead.astro";
 import Container from "@components/container.astro";
 
 // Filter blog entries with 'draft: false' & date before current date
@@ -25,25 +26,19 @@ publishedStories = await Promise.all(publishedStories.map(async (story) => {
 
 <Layout title="Stories">
   <Container>
-    <div class="mx-auto max-w-3xl mt-14">
-
-      <h1
-        class="text-4xl lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight mb-2">
-        Stories
-      </h1>
-      <ul class="grid gap-16 max-w-4xl mt-14 mx-auto">
-        {
-          publishedStories.map((story) => (
-            <a href=`stories/${story.slug}`>
-            <Hero 
-              splashText={story.data.title}
-              heroText={story.data.author}
-              headerImage={story.data.bannerImage}
-            />
-            </a>
-          ))
-        }
-      </ul>
-    </div>
+    <SectionHead text="Stories"/>
+    <ul>
+      {
+        publishedStories.map((story) => (
+          <a href=`stories/${story.slug}`>
+          <Hero 
+            splashText={story.data.title}
+            heroText={story.data.author}
+            headerImage={story.data.bannerImage}
+          />
+          </a>
+        ))
+      }
+    </ul>
   </Container>
 </Layout>

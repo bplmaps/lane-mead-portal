@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 const { id } = Astro.props;
+
 
 let title;
 
@@ -9,11 +11,11 @@ async function getImageURL(id) {
         .then(response => response.json())
     title = data.response.document.title_info_primary_tsi;
     const exemplary_image = data.response.document.exemplary_image_ssi
-    const url = `https://bpldcassets.blob.core.windows.net/derivatives/images/${exemplary_image}/image_thumbnail_300.jpg`
+    const url = new URL(`https://bpldcassets.blob.core.windows.net/derivatives/images/${exemplary_image}/image_thumbnail_300.jpg`)
     return url
 }
 
-let data = await getImageURL(id);
+let url = await getImageURL(id);
 ---
 
-<img class="object-cover" src={data}  alt=`Image from ${title}`>
+<Image class="object-cover" src={url.toString()}  inferSize={true} alt=`Image from ${title}`>

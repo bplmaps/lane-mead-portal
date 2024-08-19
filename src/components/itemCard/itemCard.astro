@@ -5,13 +5,13 @@ import Card from "@components/card.astro"
 import ClientLoadingItemCard from "@components/itemCard/clientLoadingItemCard.svelte"
 
 export interface Props {
-    "identifier": string;
+    "id": string;
     "fullHeight": boolean;
 }
 
-const { identifier, fullHeight } = Astro.props;
-const record = await getEntry('items', identifier);
-const link = `/items/${identifier}`
+const { id, fullHeight } = Astro.props;
+const record = await getEntry('items', id);
+const link = `/items/${id}`
 
 const tags = record.data.tags.map((t)=>{
   return `<span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 mr-2">${t}</span>`;

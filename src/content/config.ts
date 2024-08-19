@@ -11,7 +11,7 @@ const stories = defineCollection({
     banner: z.string(),
     bannerImage: z.object({
       src: z.string(),
-      altText: z.string(),
+      alt: z.string(),
     }).optional()
   }),
 });

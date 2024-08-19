@@ -8,10 +8,10 @@ const repo = id.includes("ia--") ? "ia" : "dc";
 id = (repo === "ia") ? id.split("ia--")[1] : id.replace("--", ":");
 
 const metaUrl = (repo === "ia") ? 
-    `https://archive.org/metadata/${id}&output=json` : `https://www.digitalcommonwealth.org/search/${id}.json`;
+    new URL(`https://archive.org/metadata/${id}&output=json`) : new URL(`https://www.digitalcommonwealth.org/search/${id}.json`);
 
 const collectionUrl = (repo === "ia") ? 
-    `https://archive.org/details/${id}` : `https://www.digitalcommonwealth.org/search/${id}/`;
+    new URL(`https://archive.org/details/${id}`) : new URL(`https://www.digitalcommonwealth.org/search/${id}/`);
 
 const response = await fetch(metaUrl);
 let meta = await response.json()
@@ -36,7 +36,7 @@ if (repo === "ia") {
   // data.description = meta.metadata.description
   data.date = meta.date_tsim
   data.creator = meta.name_tsim
-  data.manifest = `https://www.digitalcommonwealth.org/search/${id}/manifest.json`
+  data.manifest = new URL(`https://www.digitalcommonwealth.org/search/${id}/manifest.json`).toString()
 }
 ---
 

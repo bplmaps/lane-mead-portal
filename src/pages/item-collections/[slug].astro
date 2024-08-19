@@ -24,7 +24,7 @@ const { entry } = Astro.props;
   <Container>
     <div class="mx-auto max-w-3xl mt-14">
       <div class="mb-3">
-        <span class="inline-flex items-center rounded-md bg-purple-100 px-2 py-1 text-sm font-medium text-purple-700">Collection Group</span>
+        <span class="inline-flex items-center rounded-md bg-purple-100 px-2 py-1 text-sm font-medium text-purple-700">Collection</span>
       </div>
 
       <h1
@@ -42,7 +42,7 @@ const { entry } = Astro.props;
 
       <CardGrid>
       { entry.data.items.map((collectionGroupItem) => (
-          <ItemCard fullHeight={false} identifier={collectionGroupItem.id} />
+          <ItemCard fullHeight={false} id={collectionGroupItem.id} />
       )
 
       ) }

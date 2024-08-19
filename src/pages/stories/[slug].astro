@@ -21,7 +21,7 @@ const { Content } = await entry.render();
 const bannerImage = await fetchImage(entry.data.banner)
 const banner = {
   "src": bannerImage.imgURL,
-  "altText": bannerImage.title
+  "alt": (bannerImage.title !== null) ? bannerImage.title : ""
 }
 ---
 

@@ -20,14 +20,14 @@ if not os.path.exists("../src/content/item-collections"):
 for row in reader:
     if("archive.org" in row["Permalink"]):
         ia = True
-        identifier = "ia--" + row["Permalink"].split("details/")[-1].split("/")[0]
+        id = "ia--" + row["Permalink"].split("details/")[-1].split("/")[0]
         
     else:
         ia = False
-        identifier = row["Permalink"].split("/")[-1]
-        if("commonwealth" not in identifier):
-            identifier = "commonwealth:" + identifier
-        identifier = identifier.replace(":","--")
+        id = row["Permalink"].split("/")[-1]
+        if("commonwealth" not in id):
+            id = "commonwealth:" + id
+        id = id.replace(":","--")
 
     itemType = "internetArchive" if ia else "digitalCommonwealth" 
 
@@ -36,14 +36,14 @@ for row in reader:
         "tags": row["Tags/Subjects"].split(", ")
     }
     
-    with open("../src/content/items/" + identifier + ".json", "w+") as outfile:
+    with open("../src/content/items/" + id + ".json", "w+") as outfile:
         json.dump(recordEntry, outfile)
 
     for group in row["Website Collection Groups"].split(", "):
         if group in collectionGroups:
-            collectionGroups[group].append(identifier)
+            collectionGroups[group].append(id)
         else:
-            collectionGroups[group] = [identifier]
+            collectionGroups[group] = [id]
 
     for (k,v) in collectionGroups.items():
         record = {

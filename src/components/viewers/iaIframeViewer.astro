@@ -4,11 +4,13 @@ interface Props {
 }
 
 const { id } = Astro.props;
+
+const frameUrl = new URL(`https://archive.org/embed/${id}`);
 ---
 
 
 <div id="outer">
-    <iframe id="iaframe" src=`https://archive.org/embed/${id}` allowfullscreen></iframe>
+    <iframe id="iaframe" src={frameUrl.toString()} allowfullscreen></iframe>
 </div>
 
 <style>
