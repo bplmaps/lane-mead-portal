@@ -1,7 +1,7 @@
 <script lang="ts">
   import { inview } from 'svelte-inview';
   import type { ObserverEventDetails, Options } from 'svelte-inview';
-  import { fetchImage } from 'utils/all.js';
+  import { fetchImage } from 'utils/all.ts';
   
   let isInView;
   const options: Options = {
