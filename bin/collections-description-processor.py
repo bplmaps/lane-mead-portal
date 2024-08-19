@@ -10,19 +10,19 @@ reader = csv.DictReader(input)
 
 
 for row in reader:
-    identifier = row["identifier"]
+    id = row["id"]
     description = row["Description"]
 
     try:
-        with open("../src/content/item-collections/" + identifier + ".json", 'r') as inFile:
+        with open("../src/content/item-collections/" + id + ".json", 'r') as inFile:
             j = json.load(inFile)
         
         j["description"] = description
 
         print(j)
 
-        with open("../src/content/item-collections/" + identifier + ".json", 'w') as outFile:
+        with open("../src/content/item-collections/" + id + ".json", 'w') as outFile:
             json.dump(j, outFile)
         
     except:
-        print(f'Could not find collection {identifier}')  
+        print(f'Could not find collection {id}')  
