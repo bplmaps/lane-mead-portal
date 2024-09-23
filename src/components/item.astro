@@ -32,10 +32,10 @@ if (repo === "ia") {
   data.creator = meta.creator
 } else {
   meta = meta.data.attributes
-  data.title = meta.title_info_primary_tsi
+  data.title = meta.title_info_primary_tsi ? meta.title_info_primary_tsi : "No title"
   // data.description = meta.metadata.description
-  data.date = meta.date_tsim
-  data.creator = meta.name_tsim
+  data.date = meta.date_tsim ? meta.date_tsim : "Not known"
+  data.creator = meta.name_tsim ? meta.name_tsim : "Not known"
   data.manifest = new URL(`https://www.digitalcommonwealth.org/search/${id}/manifest.json`).toString()
 }
 ---
