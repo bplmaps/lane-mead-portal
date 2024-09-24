@@ -5,8 +5,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["henderson-slab-basic", ...defaultTheme.fontFamily.serif],
-        sans: ["henderson-sans-basic", ...defaultTheme.fontFamily.sans],
+        serif: ["Halant", ...defaultTheme.fontFamily.serif],
+        sans: ["Geologica", ...defaultTheme.fontFamily.sans],
       },
     },
   },

@@ -14,7 +14,7 @@ const { id, fullHeight, data } = Astro.props;
 const link = `/items/${id}`
 
 ---
-<a href={link} class="no-underline">
+<a href={link} class="no-underline not-prose font-sans">
 <Card>
     <ClientLoadingItemCard record={id} fullHeight={fullHeight} client:only="svelte" />
     <!-- <div class="p-2" set:html={tags}> -->
