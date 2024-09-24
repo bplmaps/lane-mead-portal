@@ -7,14 +7,11 @@ import ClientLoadingItemCard from "@components/itemCard/clientLoadingItemCard.sv
 export interface Props {
     "id": string;
     "fullHeight": boolean;
+    data?: object;
 }
 
-const { id, fullHeight } = Astro.props;
+const { id, fullHeight, data } = Astro.props;
 const link = `/items/${id}`
-
-// const tags = record.data.tags.map((t)=>{
-//   return `<span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 mr-2">${t}</span>`;
-// })
 
 ---
 <a href={link} class="no-underline">
