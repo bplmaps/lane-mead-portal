@@ -2,7 +2,11 @@
 import IaIframeViewer from "@components/viewers/iaIframeViewer.astro";
 import IiifViewer from "@components/viewers/iiifViewer.astro";
 
-let { id } = Astro.props;
+let { id, itemMeta } = Astro.props;
+
+const tags = itemMeta.tags ? itemMeta.tags.map((t)=>{
+  return `<span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 mr-2">${t}</span>`;
+}) : null;
 
 const repo = id.includes("ia--") ? "ia" : "dc";
 id = (repo === "ia") ? id.split("ia--")[1] : id.replace("--", ":");
@@ -50,6 +54,7 @@ if (repo === "ia") {
     <h1 class="text-4xl mb-6 font-bold font-serif">
       {data.title}
     </h1>
+    <div class="p-2" set:html={tags}></div>
 </div>
 
 {repo === "ia" ?  <IaIframeViewer {id}/> : <IiifViewer iiifType="manifest" endpointUrl={data.manifest}/>}

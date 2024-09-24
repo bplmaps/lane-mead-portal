@@ -13,13 +13,13 @@
     (isInView = detail.inView);
 
   export let record;
-  export let title;
+  export let title = false;
   export let fullHeight = true;
   let height = "w-full object-cover";
   if (!fullHeight) {
     height = "w-full h-64 object-cover"
   }
-  let data = fetchImage(record.id)
+  let data = fetchImage(record)
 </script>
 
 <div use:inview="{options}" on:inview_change="{handleChange}" class="min-h-[15vh]">

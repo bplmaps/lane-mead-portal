@@ -1,5 +1,6 @@
 // 1. Import utilities from `astro:content`
 import { z, reference, defineCollection } from 'astro:content';
+import { docsSchema } from '@astrojs/starlight/schema';
 
 // 2. Define your collection(s)
 const stories = defineCollection({
@@ -51,5 +52,6 @@ const items = defineCollection({
 export const collections = {
   'stories': stories,
   'item-collections': itemCollections,
-  'items': items
+  'items': items,
+  docs: defineCollection({ schema: docsSchema() })
 };

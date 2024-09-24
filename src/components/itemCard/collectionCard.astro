@@ -1,12 +1,13 @@
 ---
-import { getEntries } from "astro:content";
+import { getCollection } from "astro:content";
 
 import Card from "@components/card.astro"
 import ClientLoadingItemCard from "./clientLoadingItemCard.svelte"
 
 
 const { collection, fullHeight } = Astro.props;
-const items = await getEntries(collection.data.items);
+const itemEntries = await getCollection("item-collections");
+const items = itemEntries.flatMap((entry) => entry.data.featured)
 
 let featuredItem = items.filter(function(i) {
   return i.id === collection.data.featured.id
@@ -17,7 +18,7 @@ const link = `/item-collections/${collection.id}`
 ---
 <a href={link}>
 <Card>
-    <ClientLoadingItemCard title={collection.data.title} fullHeight={fullHeight} record={featuredItem} client:only="svelte" />
+    <ClientLoadingItemCard title={collection.data.title} fullHeight={fullHeight} record={featuredItem.id} client:only="svelte" />
 </Card>
 </a>
 
