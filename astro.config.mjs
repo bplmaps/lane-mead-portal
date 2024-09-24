@@ -10,6 +10,7 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
   site: "https://astroship.web3templates.com",
   integrations: [starlight({
-    title: 'Research'
+    title: 'Research',
+    disable404Route: true,
   }), tailwind(), mdx(), sitemap(), svelte()]
 });
