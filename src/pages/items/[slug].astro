@@ -8,20 +8,18 @@ import Container from "@components/container.astro";
 // Generate a new path for every collection entry
 export async function getStaticPaths() {
   const itemEntries = await getCollection("item-collections");
-  return itemEntries.flatMap((entry) => {
-    return entry.data.items.map((item) => ({
-        params: { slug: item.id},
-        props: { item }
-      }))
-    })
+  const items = itemEntries.flatMap((entry) => entry.data.items)
+  return items.map(item => ({
+    params: { slug: item.id },
+    props: { item }
+  }));
 }
 
-const { item } = Astro.props;
-
+const { slug } = Astro.params;
 ---
 
 <Layout title="Collection Record">
   <Container>
-    <Item id={item.id} />
+    <Item id={slug} />
   </Container>
 </Layout>

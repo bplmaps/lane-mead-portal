@@ -10,18 +10,17 @@ export interface Props {
 }
 
 const { id, fullHeight } = Astro.props;
-const record = await getEntry('items', id);
 const link = `/items/${id}`
 
-const tags = record.data.tags.map((t)=>{
-  return `<span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 mr-2">${t}</span>`;
-})
+// const tags = record.data.tags.map((t)=>{
+//   return `<span class="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 mr-2">${t}</span>`;
+// })
 
 ---
 <a href={link} class="no-underline">
 <Card>
-    <ClientLoadingItemCard record={record} fullHeight={fullHeight} client:only="svelte" />
-    <div class="p-2" set:html={tags}>
+    <ClientLoadingItemCard record={id} fullHeight={fullHeight} client:only="svelte" />
+    <!-- <div class="p-2" set:html={tags}> -->
 </Card>
 </a>
 
